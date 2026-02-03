@@ -56,6 +56,8 @@ header p {
   padding: 40px 20px;
   background-color: #f0f0f0;
   width: 100%;
+  scroll-snap-type: x mandatory;
+  scroll-padding: 20px;
 }
 
 /* Individual timeline card */
@@ -67,6 +69,7 @@ header p {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   position: relative;
   transition: transform 0.3s ease;
+  scroll-snap-align: start;
 }
 
 /* Card hover effect */
@@ -93,14 +96,14 @@ header p {
 /* Images in cards */
 .card img {
   width: 100%;
-  height: auto;
+  height: 160px;
+  object-fit: cover;
   border-radius: 4px;
   margin-bottom: 15px;
 }
 
 /* Hidden text that shows on hover */
 .hover-text {
-  display: none;
   position: absolute;
   top: 0;
   left: 0;
@@ -113,11 +116,16 @@ header p {
   font-size: 14px;
   line-height: 1.6;
   overflow: auto;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.6s ease-in-out;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 /* Show hover text when card is hovered */
 .card:hover .hover-text {
-  display: block;
+  opacity: 1;
+  pointer-events: auto;
 }
 
 /* Instruction text at bottom */
@@ -192,6 +200,8 @@ header p {
     padding: 20px 10px;
     gap: 15px;
     min-height: auto;
+    flex-direction: column;
+    overflow-x: visible;
   }
   
   /* Remove extra margin from body */
@@ -199,11 +209,12 @@ header p {
     margin: 0;
   }
   
-  /* Larger cards on mobile to fill screen space */
+  /* Full width cards on mobile when stacked vertically */
   .card {
-    min-width: 280px;
+    min-width: 100%;
+    width: 100%;
     padding: 20px;
-    min-height: 350px;
+    min-height: auto;
   }
   
   /* Smaller year heading */
